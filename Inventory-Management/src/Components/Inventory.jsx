@@ -62,9 +62,9 @@ export default function InventoryApp() {
         variant="h4"
         align="center"
         gutterBottom
-        sx={{ fontWeight: "bold", color: "#5D4037" }}
+        sx={{ fontWeight: "bold", color: "#01010cff" }}
       >
-        ☕ Coffee Shop Inventory
+         Coffee Shop Inventory
       </Typography>
 
       <Card sx={{ mb: 4, p: 2 }}>
