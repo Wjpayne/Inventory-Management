@@ -28,7 +28,7 @@ export default function InventoryApp() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
 
-  const apiUrl = "https://inventory-management-g476.onrender.com/api";
+  const apiUrl = "https://inventory-management-g476.onrender.com";
 
   // Fetch items from backend
   useEffect(() => {
