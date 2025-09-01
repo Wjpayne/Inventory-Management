@@ -19,6 +19,7 @@ import {
 import { AddCircle, Delete, Edit } from "@mui/icons-material";
 import axios from "axios";
 
+
 export default function InventoryApp() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({ name: "", quantity: "", unit: "" });
@@ -27,12 +28,14 @@ export default function InventoryApp() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
 
+  const apiUrl = "https://inventory-management-g476.onrender.com/api";
+
   // Fetch items from backend
   useEffect(() => {
     const fetchItems = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:4000/items");
+        const res = await axios.get(`${apiUrl}/items`);
         setItems(res.data);
       } catch (err) {
         setError("Failed to load inventory.");
@@ -43,10 +46,12 @@ export default function InventoryApp() {
     fetchItems();
   }, []);
 
+  console.log("API URL:", apiUrl); // Debugging line
+
   const handleAdd = async () => {
     if (!newItem.name || !newItem.quantity || !newItem.unit) return;
     try {
-      const res = await axios.post("http://localhost:4000/items", newItem);
+      const res = await axios.post(`${apiUrl}/items`, newItem);
       setItems([...items, res.data]);
       setNewItem({ name: "", quantity: "", unit: "" });
       setSuccess("Item added successfully!");
@@ -57,7 +62,7 @@ export default function InventoryApp() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/items/${id}`);
+      await axios.delete(`${apiUrl}/items/${id}`);
       setItems(items.filter((item) => item._id !== id));
       setSuccess("Item deleted successfully!");
     } catch (err) {
@@ -76,7 +81,7 @@ export default function InventoryApp() {
   const handleEditSave = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:4000/items/${editItem._id}`,
+        `${apiUrl}/items/${editItem._id}`,
         editItem
       );
       setItems(items.map((i) => (i._id === res.data._id ? res.data : i)));
