@@ -1,16 +1,14 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import './App.css'
+import "./App.css";
+import InventoryApp from "./Components/Inventory";
 
 function App() {
-  
-
   return (
     <>
-   
-    <h1>Inventory Management System</h1>
+      <InventoryApp />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
