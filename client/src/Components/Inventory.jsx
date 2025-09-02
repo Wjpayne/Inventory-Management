@@ -19,7 +19,6 @@ import {
 import { AddCircle, Delete, Edit } from "@mui/icons-material";
 import axios from "axios";
 
-
 export default function InventoryApp() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({ name: "", quantity: "", unit: "" });
@@ -80,10 +79,7 @@ export default function InventoryApp() {
 
   const handleEditSave = async () => {
     try {
-      const res = await axios.put(
-        `${apiUrl}/items/${editItem._id}`,
-        editItem
-      );
+      const res = await axios.put(`${apiUrl}/items/${editItem._id}`, editItem);
       setItems(items.map((i) => (i._id === res.data._id ? res.data : i)));
       setEditItem(null);
       setSuccess("Item updated successfully!");
@@ -93,14 +89,14 @@ export default function InventoryApp() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ backgroundColor: "#899281", py: 4 }}>
       <Typography
         variant="h4"
         align="center"
         gutterBottom
-        sx={{ fontWeight: "bold", color: "#0a0300ff" }}
+        sx={{ fontWeight: "bold", color: "#ffffffff" }}
       >
-         Coffee Shop Inventory
+        Coffee Shop Inventory
       </Typography>
 
       {/* Loading */}
@@ -134,14 +130,36 @@ export default function InventoryApp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <TextField
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#899281", // Changes the focused border color
+                    },
+                  },
+                  "& label.Mui-focused": {
+                    color: "#899281", // Changes the focused label color
+                  },
+                }}
                 fullWidth
-                label="Name"
+                label="Item"
                 value={newItem.name}
-                onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, name: e.target.value })
+                }
               />
             </Grid>
             <Grid item xs={12} sm={3}>
               <TextField
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#899281", // Changes the focused border color
+                    },
+                  },
+                  "& label.Mui-focused": {
+                    color: "#899281", // Changes the focused label color
+                  },
+                }}
                 fullWidth
                 type="number"
                 label="Quantity"
@@ -153,10 +171,22 @@ export default function InventoryApp() {
             </Grid>
             <Grid item xs={12} sm={3}>
               <TextField
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#899281", // Changes the focused border color
+                    },
+                  },
+                  "& label.Mui-focused": {
+                    color: "#899281", // Changes the focused label color
+                  },
+                }}
                 fullWidth
-                label="Unit (kg, lbs, etc.)"
+                label="Unit (kg, lbs, boxes etc.)"
                 value={newItem.unit}
-                onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, unit: e.target.value })
+                }
               />
             </Grid>
             <Grid item xs={12} sm={2}>
@@ -165,7 +195,11 @@ export default function InventoryApp() {
                 variant="contained"
                 startIcon={<AddCircle />}
                 onClick={handleAdd}
-                sx={{ height: "100%" }}
+                sx={{
+                  backgroundColor: "#899281",
+                  color: "#fffff",
+                  height: "100%",
+                }}
               >
                 Add
               </Button>
@@ -196,12 +230,15 @@ export default function InventoryApp() {
                 </div>
                 <div>
                   <IconButton
-                    color="primary"
+                    sx={{ color: "#385a40ff" }}
                     onClick={() => handleEditOpen(item)}
                   >
                     <Edit />
                   </IconButton>
-                  <IconButton color="error" onClick={() => handleDelete(item._id)}>
+                  <IconButton
+                    sx={{ color: "#c94509ff" }}
+                    onClick={() => handleDelete(item._id)}
+                  >
                     <Delete />
                   </IconButton>
                 </div>
@@ -217,6 +254,16 @@ export default function InventoryApp() {
           <DialogTitle>Edit Item</DialogTitle>
           <DialogContent sx={{ pt: 2 }}>
             <TextField
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#899281", // Changes the focused border color
+                  },
+                },
+                "& label.Mui-focused": {
+                  color: "#899281", // Changes the focused label color
+                },
+              }}
               fullWidth
               margin="dense"
               label="Name"
@@ -224,6 +271,16 @@ export default function InventoryApp() {
               onChange={(e) => handleEditChange("name", e.target.value)}
             />
             <TextField
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#899281", // Changes the focused border color
+                  },
+                },
+                "& label.Mui-focused": {
+                  color: "#899281", // Changes the focused label color
+                },
+              }}
               fullWidth
               margin="dense"
               type="number"
@@ -232,6 +289,16 @@ export default function InventoryApp() {
               onChange={(e) => handleEditChange("quantity", e.target.value)}
             />
             <TextField
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#899281", // Changes the focused border color
+                  },
+                },
+                "& label.Mui-focused": {
+                  color: "#899281", // Changes the focused label color
+                },
+              }}
               fullWidth
               margin="dense"
               label="Unit"
@@ -240,8 +307,18 @@ export default function InventoryApp() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setEditItem(null)}>Cancel</Button>
-            <Button variant="contained" onClick={handleEditSave}>
+            <Button sx={{ color: "black" }} onClick={() => setEditItem(null)}>
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                backgroundColor: "#899281",
+                color: "#fffff",
+                height: "100%",
+              }}
+              variant="contained"
+              onClick={handleEditSave}
+            >
               Save
             </Button>
           </DialogActions>
