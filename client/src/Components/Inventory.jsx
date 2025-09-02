@@ -102,7 +102,7 @@ export default function InventoryApp() {
       {/* Loading */}
       {loading && (
         <Grid container justifyContent="center" sx={{ py: 4 }}>
-          <CircularProgress sx = {{color: "#ffff"}} />
+          <CircularProgress sx={{ color: "#ffff" }} />
         </Grid>
       )}
 
@@ -163,6 +163,11 @@ export default function InventoryApp() {
                 fullWidth
                 type="number"
                 label="Quantity"
+                slotProps={{
+                  htmlInput: {
+                    min: 0,
+                  },
+                }}
                 value={newItem.quantity}
                 onChange={(e) =>
                   setNewItem({ ...newItem, quantity: e.target.value })
