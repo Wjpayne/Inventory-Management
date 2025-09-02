@@ -102,7 +102,7 @@ export default function InventoryApp() {
       {/* Loading */}
       {loading && (
         <Grid container justifyContent="center" sx={{ py: 4 }}>
-          <CircularProgress />
+          <CircularProgress sx = {{color: "#ffff"}} />
         </Grid>
       )}
 
@@ -284,6 +284,7 @@ export default function InventoryApp() {
               fullWidth
               margin="dense"
               type="number"
+              InputProps={{ inputProps: { min: 0 } }}
               label="Quantity"
               value={editItem.quantity}
               onChange={(e) => handleEditChange("quantity", e.target.value)}
